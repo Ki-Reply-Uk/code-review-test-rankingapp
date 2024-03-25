@@ -1,10 +1,19 @@
-﻿const Item = ({item, drag, itemImgObj }) => {
+﻿import PropTypes from 'prop-types';
+
+const Item = ({ item, drag, image }) => {
     return (
         <div className="unranked-cell">
-            <img id={`item-${item.id}`} src={itemImgObj.image}
-                style={{ cursor: "pointer" }} draggable="true" onDragStart={drag}
-            />
+            <img src={image} style={{ cursor: "pointer" }} draggable="true" onDragStart={drag} />
         </div>     
     )
 }
-export default Item;
+
+Item.propTypes = {
+    item: PropTypes.shape({
+        id: PropTypes.number.isRequired
+    }).isRequired,
+    drag: PropTypes.func.isRequired,
+    image: PropTypes.string.isRequired
+}
+
+export default React.memo(Item);
