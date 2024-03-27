@@ -1,21 +1,19 @@
-﻿import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const Item = ({ item, drag, itemImgObj }) => {
-    const getImageId = itemId => `item-${itemId}`;
+const Item = ({ item, drag, itemImage }) => {
     return (
         <div className="unranked-cell">
-            <img id={getImageId(item.id)} src={itemImgObj.image}
-                alt={itemImgObj.description || 'Item image'}
-                style={{ cursor: "pointer" }} draggable="true" onDragStart={drag}
-            />
+            <img src={itemImage} alt={`Item ${item.id}`} style={{ cursor: "pointer" }} draggable="true" onDragStart={drag} />
         </div>     
     )
 }
 
 Item.propTypes = {
-    item: PropTypes.object.isRequired,
+    item: PropTypes.shape({
+        id: PropTypes.number.isRequired
+    }).isRequired,
     drag: PropTypes.func.isRequired,
-    itemImgObj: PropTypes.object.isRequired
+    itemImage: PropTypes.string.isRequired
 };
 
 export default Item;
